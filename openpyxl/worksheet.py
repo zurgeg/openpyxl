@@ -375,8 +375,11 @@ class Worksheet(object):
 
     def calculate_dimension(self):
         """Return the minimum bounding range for all cells containing data."""
-        return 'A1:%s%d' % (get_column_letter(self.get_highest_column()),
-                            self.get_highest_row())
+        try:
+            return f"{get_column_letter(min_col)}{min_row}:{get_column_letter(max_col)}{max_row}"
+        except:
+            return 'A1:%s%d' % (get_column_letter(self.get_highest_column()),
+                                self.get_highest_row())
 
     def range(self, range_string, row = 0, column = 0):
         """Returns a 2D array of cells, with optional row and column offsets.
